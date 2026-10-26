@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 92%;
+
+    --card: 220 18% 11%;
+    --card-foreground: 210 20% 92%;
+
+    --popover: 220 18% 13%;
+    --popover-foreground: 210 20% 92%;
+
+    --primary: 200 100% 50%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 16% 18%;
+    --secondary-foreground: 210 20% 85%;
+
+    --muted: 220 14% 15%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 170 80% 45%;
+    --accent-foreground: 220 20% 7%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 20% 7%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 220 20% 7%;
+
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 200 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 18% 9%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 200 100% 50%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 14% 15%;
+    --sidebar-accent-foreground: 210 20% 85%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 200 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+  .glass-strong {
+    @apply bg-card/95 backdrop-blur-2xl border border-border/60;
+  }
+  .glow-primary {
+    box-shadow: 0 0 20px hsl(200 100% 50% / 0.3), 0 0 60px hsl(200 100% 50% / 0.1);
+  }
+  .glow-danger {
+    box-shadow: 0 0 20px hsl(0 85% 55% / 0.4), 0 0 60px hsl(0 85% 55% / 0.15);
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+}
+
+/* Leaflet overrides for dark theme */
+.leaflet-container {
+  background: hsl(220 20% 7%) !important;
+}
+.leaflet-tile-pane {
+  filter: brightness(0.7) contrast(1.1) saturate(0.8);
+}
+.leaflet-control-zoom a {
+  background: hsl(220 18% 11% / 0.9) !important;
+  color: hsl(210 20% 85%) !important;
+  border-color: hsl(220 14% 18%) !important;
+}
+
+/* High-contrast rider info popups on the map */
+.dark-popup .leaflet-popup-content-wrapper,
+.dark-popup .leaflet-popup-tip {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+.dark-popup .leaflet-popup-content-wrapper {
+  border: 2px solid #1d4ed8;
+  border-radius: 12px;
+}
+.dark-popup .leaflet-popup-content {
+  margin: 10px 14px;
+  font-family: Inter, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.dark-popup .leaflet-popup-content .text-sm {
+  font-size: 16px;
+  font-weight: 800;
+}
+.dark-popup .leaflet-popup-content .text-xs {
+  font-size: 13px;
+  opacity: 1;
+}
+.dark-popup .leaflet-popup-close-button {
+  color: #0f172a !important;
+  font-weight: 700;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(220 14% 25%);
+  border-radius: 3px;
+}
+
+/* SOS pulse animation */
+@keyframes sos-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 hsl(0 85% 55% / 0.7); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 15px hsl(0 85% 55% / 0); }
+}
+.sos-pulse {
+  animation: sos-pulse 1.5s ease-in-out infinite;
+}
+
+/* Marker pulse */
+@keyframes marker-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.8); }
+}
+.marker-pulse {
+  animation: marker-pulse 2s ease-in-out infinite;
+}
